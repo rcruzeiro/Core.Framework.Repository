@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>netcoreapp2.2</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <PackageVersion>2.0.0</PackageVersion>
+        <Authors>Rafael Cruzeiro</Authors>
+        <Owners>Rafael Cruzeiro</Owners>
+        <PackageProjectUrl>https://github.com/rcruzeiro/Core.Framework.Repository</PackageProjectUrl>
+        <Title>Core.Framework.Repository</Title>
+        <Description>A new version of the Core.Framework.Version</Description>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Core.Framework.Entities" Version="1.1.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.4" />
+        <PackageReference Include="NuGet.Build.Packaging" Version="0.2.0" />
+    </ItemGroup>
+    <ItemGroup>
+      <None Remove=".gitignore" />
+      <None Remove="README.md" />
+    </ItemGroup>
+</Project>
