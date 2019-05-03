@@ -3,12 +3,13 @@
     <PropertyGroup>
         <TargetFramework>netcoreapp2.2</TargetFramework>
         <LangVersion>latest</LangVersion>
-        <PackageVersion>2.0.0</PackageVersion>
+        <PackageVersion>2.0.1</PackageVersion>
         <Authors>Rafael Cruzeiro</Authors>
         <Owners>Rafael Cruzeiro</Owners>
         <PackageProjectUrl>https://github.com/rcruzeiro/Core.Framework.Repository</PackageProjectUrl>
         <Title>Core.Framework.Repository</Title>
         <Description>A new version of the Core.Framework.Version</Description>
+        <PackageId>Core.Framework.Repository</PackageId>
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="Core.Framework.Entities" Version="1.1.0" />

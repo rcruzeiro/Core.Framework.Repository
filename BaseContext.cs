@@ -7,8 +7,22 @@ namespace Core.Framework.Repository
     {
         IDbContextTransaction transaction;
 
+        protected readonly string _connectionString;
+
+        protected BaseContext()
+        { }
+
         protected BaseContext(DbContextOptions options)
             : base(options)
+        { }
+
+        protected BaseContext(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
+
+        protected BaseContext(IDataSource source)
+            : this(source.GetConnectionString())
         { }
 
         public void BeginTransaction()
