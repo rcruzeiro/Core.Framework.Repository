@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Core.Framework.Repository
 {
-    public abstract class CoreContext : DbContext, IUnitOfWork
+    public abstract class BaseContext : DbContext, IUnitOfWork
     {
         IDbContextTransaction transaction;
 
-        protected CoreContext(DbContextOptions options)
+        protected BaseContext(DbContextOptions options)
             : base(options)
         { }
 
