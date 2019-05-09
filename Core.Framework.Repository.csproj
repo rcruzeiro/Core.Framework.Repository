@@ -3,7 +3,7 @@
     <PropertyGroup>
         <TargetFramework>netcoreapp2.2</TargetFramework>
         <LangVersion>latest</LangVersion>
-        <PackageVersion>2.0.4</PackageVersion>
+        <PackageVersion>2.0.5</PackageVersion>
         <Authors>Rafael Cruzeiro</Authors>
         <Owners>Rafael Cruzeiro</Owners>
         <PackageProjectUrl>https://github.com/rcruzeiro/Core.Framework.Repository</PackageProjectUrl>

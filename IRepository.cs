@@ -26,11 +26,5 @@ namespace Core.Framework.Repository
         void Remove(IEnumerable<T> entities);
 
         int SaveChanges();
-
-        void BeginTransaction();
-
-        void Commit();
-
-        void Rollback();
     }
 }

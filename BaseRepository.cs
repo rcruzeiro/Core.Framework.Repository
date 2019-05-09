@@ -177,36 +177,6 @@ namespace Core.Framework.Repository
             { throw ex; }
         }
 
-        public void BeginTransaction()
-        {
-            try
-            {
-                _unitOfWork.BeginTransaction();
-            }
-            catch (Exception ex)
-            { throw ex; }
-        }
-
-        public void Commit()
-        {
-            try
-            {
-                _unitOfWork.Commit();
-            }
-            catch (Exception ex)
-            { throw ex; }
-        }
-
-        public void Rollback()
-        {
-            try
-            {
-                _unitOfWork.Rollback();
-            }
-            catch (Exception ex)
-            { throw ex; }
-        }
-
         public void Dispose()
         {
             Dispose(true);
