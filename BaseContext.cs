@@ -37,7 +37,7 @@ namespace Core.Framework.Repository
             try
             {
                 return _context.Set<T>()
-                    .Where(predicate)
+                    .NullSafeWhere(predicate)
                     .ToList();
             }
             catch (Exception ex)
@@ -64,7 +64,7 @@ namespace Core.Framework.Repository
             try
             {
                 return await _context.Set<T>()
-                    .Where(predicate)
+                    .NullSafeWhere(predicate)
                     .AsQueryable()
                     .ToListAsync(cancellationToken);
             }
@@ -246,6 +246,14 @@ namespace Core.Framework.Repository
                 (current, include) => current.Include(include));
 
             return stringIncludes;
+        }
+    }
+
+    static class NullSafeExtensions
+    {
+        internal static IEnumerable<T> NullSafeWhere<T>(this IEnumerable<T> source, Func<T, bool> predicate = null)
+        {
+            return predicate == null ? source : source.Where(predicate);
         }
     }
 }
