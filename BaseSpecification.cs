@@ -6,7 +6,7 @@ using Core.Framework.Entities;
 namespace Core.Framework.Repository
 {
     public abstract class BaseSpecification<T> : ISpecification<T>
-        where T : class, IDbObject
+        where T : class, IAggregationRoot
     {
         public Expression<Func<T, bool>> Criteria { get; }
 

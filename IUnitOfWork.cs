@@ -7,31 +7,31 @@ namespace Core.Framework.Repository
     public interface IUnitOfWork : IDisposable
     {
         IEnumerable<T> Get<T>(Func<T, bool> predicate = null)
-            where T : class, IDbObject;
+            where T : class, IAggregationRoot;
 
         IEnumerable<T> Get<T>(ISpecification<T> spec)
-            where T : class, IDbObject;
+            where T : class, IAggregationRoot;
 
         T Find<T>(params object[] keyValues)
-            where T : class, IDbObject;
+            where T : class, IAggregationRoot;
 
-        void Add<T>(T entity)
-            where T : class, IDbObject;
+        T Add<T>(T entity)
+            where T : class, IAggregationRoot;
 
         void Add<T>(IEnumerable<T> entities)
-            where T : class, IDbObject;
+            where T : class, IAggregationRoot;
 
-        void Update<T>(T entity)
-            where T : class, IDbObject;
+        T Update<T>(T entity)
+            where T : class, IAggregationRoot;
 
         void Update<T>(IEnumerable<T> entities)
-            where T : class, IDbObject;
+            where T : class, IAggregationRoot;
 
         void Remove<T>(T entity)
-            where T : class, IDbObject;
+            where T : class, IAggregationRoot;
 
         void Remove<T>(IEnumerable<T> entities)
-            where T : class, IDbObject;
+            where T : class, IAggregationRoot;
 
         int SaveChanges();
 

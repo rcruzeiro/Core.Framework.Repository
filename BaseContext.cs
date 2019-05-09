@@ -107,11 +107,11 @@ namespace Core.Framework.Repository
             { throw ex; }
         }
 
-        void IUnitOfWork.Add<T>(T entity)
+        T IUnitOfWork.Add<T>(T entity)
         {
             try
             {
-                _context.Add(entity);
+                return _context.Add(entity).Entity;
             }
             catch (Exception ex)
             { throw ex; }
@@ -147,11 +147,11 @@ namespace Core.Framework.Repository
             { throw ex; }
         }
 
-        void IUnitOfWork.Update<T>(T entity)
+        T IUnitOfWork.Update<T>(T entity)
         {
             try
             {
-                _context.Update(entity);
+                return _context.Update(entity).Entity;
             }
             catch (Exception ex)
             { throw ex; }
@@ -233,7 +233,7 @@ namespace Core.Framework.Repository
         }
 
         private IQueryable<T> GetSpecIQueryable<T>(ISpecification<T> spec)
-            where T : class, IDbObject
+            where T : class, IAggregationRoot
         {
             // fetch a Queryable that includes all expression-based includes
             var includes = spec.Includes

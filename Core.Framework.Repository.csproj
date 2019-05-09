@@ -3,7 +3,7 @@
     <PropertyGroup>
         <TargetFramework>netcoreapp2.2</TargetFramework>
         <LangVersion>latest</LangVersion>
-        <PackageVersion>2.0.2</PackageVersion>
+        <PackageVersion>2.0.3</PackageVersion>
         <Authors>Rafael Cruzeiro</Authors>
         <Owners>Rafael Cruzeiro</Owners>
         <PackageProjectUrl>https://github.com/rcruzeiro/Core.Framework.Repository</PackageProjectUrl>
@@ -12,7 +12,7 @@
         <PackageId>Core.Framework.Repository</PackageId>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="Core.Framework.Entities" Version="1.1.0" />
+        <PackageReference Include="Core.Framework.Entities" Version="1.2.0" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.4" />
         <PackageReference Include="NuGet.Build.Packaging" Version="0.2.0" />
     </ItemGroup>
