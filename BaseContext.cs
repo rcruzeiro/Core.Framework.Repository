@@ -33,6 +33,18 @@ namespace Core.Framework.Repository
             : this(source.GetConnectionString())
         { }
 
+        IEnumerable<T> IUnitOfWork.Get<T>(Func<T, bool> predicate)
+        {
+            try
+            {
+                return _context.Set<T>()
+                    .NullSafeWhere(predicate)
+                    .ToList();
+            }
+            catch (Exception ex)
+            { throw ex; }
+        }
+
         IEnumerable<T> IUnitOfWork.Get<T>(ISpecification<T> spec)
         {
             try
@@ -43,6 +55,19 @@ namespace Core.Framework.Repository
                 return query
                     .NullSafeWhere(spec.Criteria)
                     .ToList();
+            }
+            catch (Exception ex)
+            { throw ex; }
+        }
+
+        async Task<IEnumerable<T>> IUnitOfWorkAsync.GetAsync<T>(Func<T, bool> predicate, CancellationToken cancellationToken)
+        {
+            try
+            {
+                return await _context.Set<T>()
+                     .NullSafeWhere(predicate)
+                     .AsQueryable()
+                     .ToListAsync(cancellationToken);
             }
             catch (Exception ex)
             { throw ex; }

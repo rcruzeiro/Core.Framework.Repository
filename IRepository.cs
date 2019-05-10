@@ -7,7 +7,9 @@ namespace Core.Framework.Repository
     public interface IRepository<T> : IDisposable
         where T : class, IAggregationRoot
     {
-        IEnumerable<T> Get(ISpecification<T> spec = null);
+        IEnumerable<T> Get(Func<T, bool> predicate = null);
+
+        IEnumerable<T> Get(ISpecification<T> spec);
 
         T Find(params object[] keyValues);
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Core.Framework.Entities;
@@ -8,7 +9,9 @@ namespace Core.Framework.Repository
     public interface IRepositoryAsync<T> : IRepository<T>
         where T : class, IAggregationRoot
     {
-        Task<IEnumerable<T>> GetAsync(ISpecification<T> spec = null, CancellationToken cancellationToken = default);
+        Task<IEnumerable<T>> GetAsync(Func<T, bool> predicate = null, CancellationToken cancellationToken = default);
+
+        Task<IEnumerable<T>> GetAsync(ISpecification<T> spec, CancellationToken cancellationToken = default);
 
         Task<T> FindAsync(object[] keyValues, CancellationToken cancellationToken = default);
 
