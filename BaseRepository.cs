@@ -16,17 +16,7 @@ namespace Core.Framework.Repository
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
-        public virtual IEnumerable<T> Get(Func<T, bool> predicate = null)
-        {
-            try
-            {
-                return _unitOfWork.Get(predicate);
-            }
-            catch (Exception ex)
-            { throw ex; }
-        }
-
-        public virtual IEnumerable<T> Get(ISpecification<T> spec)
+        public virtual IEnumerable<T> Get(ISpecification<T> spec = null)
         {
             try
             {
@@ -36,17 +26,7 @@ namespace Core.Framework.Repository
             { throw ex; }
         }
 
-        public virtual async Task<IEnumerable<T>> GetAsync(Func<T, bool> predicate = null, CancellationToken cancellationToken = default)
-        {
-            try
-            {
-                return await _unitOfWork.GetAsync(predicate, cancellationToken);
-            }
-            catch (Exception ex)
-            { throw ex; }
-        }
-
-        public virtual async Task<IEnumerable<T>> GetAsync(ISpecification<T> spec, CancellationToken cancellationToken = default)
+        public virtual async Task<IEnumerable<T>> GetAsync(ISpecification<T> spec = null, CancellationToken cancellationToken = default)
         {
             try
             {

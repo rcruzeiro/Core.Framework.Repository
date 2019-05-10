@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Core.Framework.Entities;
@@ -32,18 +33,6 @@ namespace Core.Framework.Repository
             : this(source.GetConnectionString())
         { }
 
-        IEnumerable<T> IUnitOfWork.Get<T>(Func<T, bool> predicate)
-        {
-            try
-            {
-                return _context.Set<T>()
-                    .NullSafeWhere(predicate)
-                    .ToList();
-            }
-            catch (Exception ex)
-            { throw ex; }
-        }
-
         IEnumerable<T> IUnitOfWork.Get<T>(ISpecification<T> spec)
         {
             try
@@ -52,21 +41,8 @@ namespace Core.Framework.Repository
 
                 // return the result of the query using the specification's criteria expression
                 return query
-                    .Where(spec.Criteria)
+                    .NullSafeWhere(spec.Criteria)
                     .ToList();
-            }
-            catch (Exception ex)
-            { throw ex; }
-        }
-
-        async Task<IEnumerable<T>> IUnitOfWorkAsync.GetAsync<T>(Func<T, bool> predicate, CancellationToken cancellationToken)
-        {
-            try
-            {
-                return await _context.Set<T>()
-                    .NullSafeWhere(predicate)
-                    .AsQueryable()
-                    .ToListAsync(cancellationToken);
             }
             catch (Exception ex)
             { throw ex; }
@@ -80,7 +56,7 @@ namespace Core.Framework.Repository
 
                 // return the awaitable result of the query using the specification's criteria expression
                 return await query
-                    .Where(spec.Criteria)
+                    .NullSafeWhere(spec.Criteria)
                     .ToListAsync(cancellationToken);
             }
             catch (Exception ex)
@@ -254,6 +230,11 @@ namespace Core.Framework.Repository
         internal static IEnumerable<T> NullSafeWhere<T>(this IEnumerable<T> source, Func<T, bool> predicate = null)
         {
             return predicate == null ? source : source.Where(predicate);
+        }
+
+        internal static IQueryable<T> NullSafeWhere<T>(this IQueryable<T> source, Expression<Func<T, bool>> predicate = null)
+        {
+            return predicate == null ? source : source.Where(predicate).AsQueryable();
         }
     }
 }

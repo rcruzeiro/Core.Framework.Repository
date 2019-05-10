@@ -6,10 +6,7 @@ namespace Core.Framework.Repository
 {
     public interface IUnitOfWork : IDisposable
     {
-        IEnumerable<T> Get<T>(Func<T, bool> predicate = null)
-            where T : class, IAggregationRoot;
-
-        IEnumerable<T> Get<T>(ISpecification<T> spec)
+        IEnumerable<T> Get<T>(ISpecification<T> spec = null)
             where T : class, IAggregationRoot;
 
         T Find<T>(params object[] keyValues)

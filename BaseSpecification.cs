@@ -16,9 +16,9 @@ namespace Core.Framework.Repository
         public List<string> IncludeStrings { get; } =
             new List<string>();
 
-        protected BaseSpecification(Expression<Func<T, bool>> criteria)
+        protected BaseSpecification(Expression<Func<T, bool>> criteria = null)
         {
-            Criteria = criteria ?? throw new ArgumentNullException(nameof(criteria));
+            Criteria = criteria;
         }
 
         protected virtual void AddInclude(Expression<Func<T, object>> includeExpression)
