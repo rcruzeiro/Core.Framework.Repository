@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using Core.Framework.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Core.Framework.Repository
 {
     public interface IRepository<T> : IDisposable
         where T : class, IAggregationRoot
     {
+        DbContext Context { get; }
+
         IEnumerable<T> Get(Func<T, bool> predicate = null);
 
         IEnumerable<T> Get(ISpecification<T> spec);

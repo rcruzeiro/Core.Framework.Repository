@@ -16,6 +16,8 @@ namespace Core.Framework.Repository
 
         protected readonly string _connectionString;
 
+        DbContext IUnitOfWork.Context => this;
+
         protected BaseContext()
         { }
 

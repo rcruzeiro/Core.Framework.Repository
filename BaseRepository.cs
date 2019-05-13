@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Core.Framework.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Core.Framework.Repository
 {
@@ -10,6 +11,8 @@ namespace Core.Framework.Repository
         where T : class, IAggregationRoot
     {
         protected readonly IUnitOfWorkAsync _unitOfWork;
+
+        public DbContext Context => _unitOfWork.Context;
 
         protected BaseRepository(IUnitOfWorkAsync unitOfWork)
         {

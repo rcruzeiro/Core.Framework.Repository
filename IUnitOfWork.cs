@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using Core.Framework.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Core.Framework.Repository
 {
     public interface IUnitOfWork : IDisposable
     {
+        DbContext Context { get; }
+
         IEnumerable<T> Get<T>(Func<T, bool> predicate = null)
             where T : class, IAggregationRoot;
 
