@@ -15,7 +15,6 @@ namespace Core.Framework.Repository
         IDbContextTransaction transaction;
 
         protected readonly string _connectionString;
-        protected readonly DbContext _context;
 
         protected BaseContext()
         { }
@@ -37,7 +36,7 @@ namespace Core.Framework.Repository
         {
             try
             {
-                return _context.Set<T>()
+                return Set<T>()
                     .NullSafeWhere(predicate)
                     .ToList();
             }
@@ -64,7 +63,7 @@ namespace Core.Framework.Repository
         {
             try
             {
-                return await _context.Set<T>()
+                return await Set<T>()
                      .NullSafeWhere(predicate)
                      .AsQueryable()
                      .ToListAsync(cancellationToken);
@@ -92,7 +91,7 @@ namespace Core.Framework.Repository
         {
             try
             {
-                return _context.Find<T>(keyValues);
+                return Find<T>(keyValues);
             }
             catch (Exception ex)
             { throw ex; }
@@ -102,7 +101,7 @@ namespace Core.Framework.Repository
         {
             try
             {
-                return await _context.FindAsync<T>(keyValues, cancellationToken);
+                return await FindAsync<T>(keyValues, cancellationToken);
             }
             catch (Exception ex)
             { throw ex; }
@@ -112,7 +111,7 @@ namespace Core.Framework.Repository
         {
             try
             {
-                return _context.Add(entity).Entity;
+                return Add(entity).Entity;
             }
             catch (Exception ex)
             { throw ex; }
@@ -122,7 +121,7 @@ namespace Core.Framework.Repository
         {
             try
             {
-                _context.AddRange(entities);
+                AddRange(entities);
             }
             catch (Exception ex)
             { throw ex; }
@@ -132,7 +131,7 @@ namespace Core.Framework.Repository
         {
             try
             {
-                await _context.AddAsync(entity, cancellationToken);
+                await AddAsync(entity, cancellationToken);
             }
             catch (Exception ex)
             { throw ex; }
@@ -142,7 +141,7 @@ namespace Core.Framework.Repository
         {
             try
             {
-                await _context.AddRangeAsync(entities, cancellationToken);
+                await AddRangeAsync(entities, cancellationToken);
             }
             catch (Exception ex)
             { throw ex; }
@@ -152,7 +151,7 @@ namespace Core.Framework.Repository
         {
             try
             {
-                return _context.Update(entity).Entity;
+                return Update(entity).Entity;
             }
             catch (Exception ex)
             { throw ex; }
@@ -162,7 +161,7 @@ namespace Core.Framework.Repository
         {
             try
             {
-                _context.UpdateRange(entities);
+                UpdateRange(entities);
             }
             catch (Exception ex)
             { throw ex; }
@@ -172,7 +171,7 @@ namespace Core.Framework.Repository
         {
             try
             {
-                _context.Remove(entity);
+                Remove(entity);
             }
             catch (Exception ex)
             { throw ex; }
@@ -182,7 +181,7 @@ namespace Core.Framework.Repository
         {
             try
             {
-                _context.RemoveRange(entities);
+                RemoveRange(entities);
             }
             catch (Exception ex)
             { throw ex; }
@@ -192,7 +191,7 @@ namespace Core.Framework.Repository
         {
             try
             {
-                return _context.SaveChanges();
+                return SaveChanges();
             }
             catch (Exception ex)
             { throw ex; }
@@ -202,7 +201,7 @@ namespace Core.Framework.Repository
         {
             try
             {
-                return await _context.SaveChangesAsync(cancellationToken);
+                return await SaveChangesAsync(cancellationToken);
             }
             catch (Exception ex)
             { throw ex; }
@@ -238,7 +237,7 @@ namespace Core.Framework.Repository
         {
             // fetch a Queryable that includes all expression-based includes
             var includes = spec.Includes
-                .Aggregate(_context.Set<T>().AsQueryable(),
+                .Aggregate(Set<T>().AsQueryable(),
                 (current, include) => current.Include(include));
 
             // modify the IQueryable to include any string-based include statements
