@@ -3,13 +3,16 @@
     <PropertyGroup>
         <TargetFramework>netcoreapp2.2</TargetFramework>
         <LangVersion>latest</LangVersion>
-        <PackageVersion>2.0.12</PackageVersion>
+        <PackageVersion>2.0.13</PackageVersion>
         <Authors>Rafael Cruzeiro</Authors>
         <Owners>Rafael Cruzeiro</Owners>
         <PackageProjectUrl>https://github.com/rcruzeiro/Core.Framework.Repository</PackageProjectUrl>
         <Title>Core.Framework.Repository</Title>
         <Description>A new version of the Core.Framework.Version</Description>
         <PackageId>Core.Framework.Repository</PackageId>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+      <DebugType></DebugType>
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="Core.Framework.Entities" Version="1.2.0" />

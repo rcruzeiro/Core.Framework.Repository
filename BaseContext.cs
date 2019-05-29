@@ -65,10 +65,9 @@ namespace Core.Framework.Repository
         {
             try
             {
-                return await Set<T>()
-                     .NullSafeWhere(predicate)
-                     .AsQueryable()
-                     .ToListAsync(cancellationToken);
+                return await Task.FromResult(
+                    Set<T>().NullSafeWhere(predicate)
+                        .ToList());
             }
             catch (Exception ex)
             { throw ex; }
