@@ -3,7 +3,7 @@
     <PropertyGroup>
         <TargetFramework>netcoreapp2.2</TargetFramework>
         <LangVersion>latest</LangVersion>
-        <PackageVersion>2.0.13</PackageVersion>
+        <PackageVersion>2.1.0</PackageVersion>
         <Authors>Rafael Cruzeiro</Authors>
         <Owners>Rafael Cruzeiro</Owners>
         <PackageProjectUrl>https://github.com/rcruzeiro/Core.Framework.Repository</PackageProjectUrl>
@@ -22,5 +22,8 @@
     <ItemGroup>
       <None Remove=".gitignore" />
       <None Remove="README.md" />
+    </ItemGroup>
+    <ItemGroup>
+      <Compile Remove="BaseContext.cs" />
     </ItemGroup>
 </Project>

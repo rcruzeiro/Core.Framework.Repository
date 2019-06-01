@@ -10,9 +10,9 @@ namespace Core.Framework.Repository
     public abstract class BaseRepository<T> : IRepositoryAsync<T>
         where T : class, IAggregationRoot
     {
-        protected readonly IUnitOfWorkAsync _unitOfWork;
+        readonly IUnitOfWorkAsync _unitOfWork;
 
-        public DbContext Context => _unitOfWork.Context;
+        protected DbContext Context => _unitOfWork.Context;
 
         protected BaseRepository(IUnitOfWorkAsync unitOfWork)
         {
@@ -29,11 +29,31 @@ namespace Core.Framework.Repository
             { throw ex; }
         }
 
+        public virtual T GetOne(Func<T, bool> predicate = null)
+        {
+            try
+            {
+                return _unitOfWork.GetOne(predicate);
+            }
+            catch (Exception ex)
+            { throw ex; }
+        }
+
         public virtual IEnumerable<T> Get(ISpecification<T> spec)
         {
             try
             {
                 return _unitOfWork.Get(spec);
+            }
+            catch (Exception ex)
+            { throw ex; }
+        }
+
+        public virtual T GetOne(ISpecification<T> spec)
+        {
+            try
+            {
+                return _unitOfWork.GetOne(spec);
             }
             catch (Exception ex)
             { throw ex; }
@@ -49,11 +69,31 @@ namespace Core.Framework.Repository
             { throw ex; }
         }
 
+        public virtual async Task<T> GetOneAsync(Func<T, bool> predicate = null, CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                return await _unitOfWork.GetOneAsync(predicate, cancellationToken);
+            }
+            catch (Exception ex)
+            { throw ex; }
+        }
+
         public virtual async Task<IEnumerable<T>> GetAsync(ISpecification<T> spec, CancellationToken cancellationToken = default)
         {
             try
             {
                 return await _unitOfWork.GetAsync(spec, cancellationToken);
+            }
+            catch (Exception ex)
+            { throw ex; }
+        }
+
+        public virtual async Task<T> GetOneAsync(ISpecification<T> spec, CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                return await _unitOfWork.GetOneAsync(spec, cancellationToken);
             }
             catch (Exception ex)
             { throw ex; }

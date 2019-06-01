@@ -12,7 +12,13 @@ namespace Core.Framework.Repository
         IEnumerable<T> Get<T>(Func<T, bool> predicate = null)
             where T : class, IAggregationRoot;
 
+        T GetOne<T>(Func<T, bool> predicate = null)
+            where T : class, IAggregationRoot;
+
         IEnumerable<T> Get<T>(ISpecification<T> spec)
+            where T : class, IAggregationRoot;
+
+        T GetOne<T>(ISpecification<T> spec)
             where T : class, IAggregationRoot;
 
         T Find<T>(params object[] keyValues)

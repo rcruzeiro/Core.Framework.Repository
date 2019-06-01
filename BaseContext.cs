@@ -46,6 +46,18 @@ namespace Core.Framework.Repository
             { throw ex; }
         }
 
+        T IUnitOfWork.GetOne<T>(Func<T, bool> predicate)
+        {
+            try
+            {
+                return Set<T>()
+                    .NullSafeWhere(predicate)
+                    .SingleOrDefault();
+            }
+            catch (Exception ex)
+            { throw ex; }
+        }
+
         IEnumerable<T> IUnitOfWork.Get<T>(ISpecification<T> spec)
         {
             try
@@ -56,6 +68,21 @@ namespace Core.Framework.Repository
                 return query
                     .NullSafeWhere(spec.Criteria)
                     .ToList();
+            }
+            catch (Exception ex)
+            { throw ex; }
+        }
+
+        T IUnitOfWork.GetOne<T>(ISpecification<T> spec)
+        {
+            try
+            {
+                var query = GetSpecIQueryable(spec);
+
+                // return the result of the query using the specification's criteria expression
+                return query
+                    .NullSafeWhere(spec.Criteria)
+                    .SingleOrDefault();
             }
             catch (Exception ex)
             { throw ex; }
@@ -73,6 +100,18 @@ namespace Core.Framework.Repository
             { throw ex; }
         }
 
+        async Task<T> IUnitOfWorkAsync.GetOneAsync<T>(Func<T, bool> predicate, CancellationToken cancellationToken)
+        {
+            try
+            {
+                return await Task.FromResult(
+                    Set<T>().NullSafeWhere(predicate)
+                    .SingleOrDefault());
+            }
+            catch (Exception ex)
+            { throw ex; }
+        }
+
         async Task<IEnumerable<T>> IUnitOfWorkAsync.GetAsync<T>(ISpecification<T> spec, CancellationToken cancellationToken)
         {
             try
@@ -83,6 +122,21 @@ namespace Core.Framework.Repository
                 return await query
                     .NullSafeWhere(spec.Criteria)
                     .ToListAsync(cancellationToken);
+            }
+            catch (Exception ex)
+            { throw ex; }
+        }
+
+        async Task<T> IUnitOfWorkAsync.GetOneAsync<T>(ISpecification<T> spec, CancellationToken cancellationToken)
+        {
+            try
+            {
+                var query = GetSpecIQueryable(spec);
+
+                // return the awaitable result of the query using the specification's criteria expression
+                return await query
+                    .NullSafeWhere(spec.Criteria)
+                    .SingleOrDefaultAsync(cancellationToken);
             }
             catch (Exception ex)
             { throw ex; }

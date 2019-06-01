@@ -11,7 +11,11 @@ namespace Core.Framework.Repository
     {
         Task<IEnumerable<T>> GetAsync(Func<T, bool> predicate = null, CancellationToken cancellationToken = default);
 
+        Task<T> GetOneAsync(Func<T, bool> predicate = null, CancellationToken cancellationToken = default);
+
         Task<IEnumerable<T>> GetAsync(ISpecification<T> spec, CancellationToken cancellationToken = default);
+
+        Task<T> GetOneAsync(ISpecification<T> spec, CancellationToken cancellationToken = default);
 
         Task<T> FindAsync(object[] keyValues, CancellationToken cancellationToken = default);
 

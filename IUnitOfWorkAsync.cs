@@ -11,7 +11,13 @@ namespace Core.Framework.Repository
         Task<IEnumerable<T>> GetAsync<T>(Func<T, bool> predicate = null, CancellationToken cancellationToken = default)
             where T : class, IAggregationRoot;
 
+        Task<T> GetOneAsync<T>(Func<T, bool> predicate = null, CancellationToken cancellationToken = default)
+            where T : class, IAggregationRoot;
+
         Task<IEnumerable<T>> GetAsync<T>(ISpecification<T> spec, CancellationToken cancellationToken = default)
+            where T : class, IAggregationRoot;
+
+        Task<T> GetOneAsync<T>(ISpecification<T> spec, CancellationToken cancellationToken = default)
             where T : class, IAggregationRoot;
 
         Task<T> FindAsync<T>(object[] keyValues, CancellationToken cancellationToken = default)
